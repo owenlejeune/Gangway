@@ -19,8 +19,8 @@ abstract class GangwayActivity: ComponentActivity() {
             ProvideTheme {
                 GangwayContainer(
                     pages = pages,
-                    onFinish = {},
-                    onSkipRequest = {},
+                    onFinish = ::onFinish,
+                    onSkipRequest = ::onSkipRequest,
                     showSkipButton = showSkipButton,
                     showPageIndicators = showPageIndicators,
                     colors = provideColors()
@@ -30,9 +30,13 @@ abstract class GangwayActivity: ComponentActivity() {
     }
 
     @Composable
-    abstract fun ProvideTheme(context: @Composable () -> Unit)
+    abstract fun ProvideTheme(content: @Composable () -> Unit)
 
     @Composable
     protected open fun provideColors(): GangwayColors = GangwayDefaults.colors()
+
+    open fun onFinish() {}
+
+    open fun onSkipRequest() {}
 
 }
